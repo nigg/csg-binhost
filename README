@@ -1,1 +1,18 @@
-This is a test
+Requirements
+
+Dependencies:
+- bash
+- rsync
+- ssh / sshfs
+- portage
+- portage-tools?! (revdep-rebuild)
+
+Settings:
+- /etc/make.conf
+  PKG_DIR="/usr/portage/packages"	# Same on Server and Client
+- SSH
+  running SSHServer on csg-binhost 
+  configured pub key auth for client
+- Portage
+  Portage should run stable stand alone on the client system, because
+  the client's configuration is used by the csg-binhost server.

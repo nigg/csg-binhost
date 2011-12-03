@@ -18,13 +18,13 @@ for SYNC_DIR in ${SYNC_DIRS[@]} do
 done
 
 echo "Syncing Portage Tree and buid updates"
-PORTAGE="/usr/partage"
+PORTAGE="/usr/portage"
 #PKG_DIR="/usr/portage/packages"	# TODO: set var in /etc/make.conf
 #PORTAGE_BINHOST=/usr/portage/packages	# not used, PKG_DIR is used with nfs/sshfs and 'emerge --usepkg' parameter
 EMERGE_OPTS="--root $BIN_HOST_REMOTE_DIR/$USER/ --config-root $BIN_HOST_REMOTE_DIR/$USER/"
-ssh $USER@$HOST 'emerge $EMERGE_OPTS --sync'
-ssh $USER@$HOST 'PKG_DIR="/usr/portage/packages" emerge $EMERGE_OPTS --buildpkg --update --deep --newuse world'
-ssh $USER@$HOST 'revdep-rebuild $EMERGE_OPTS'
+ssh $USER@$HOST "emerge $EMERGE_OPTS --sync"
+ssh $USER@$HOST "emerge $EMERGE_OPTS --buildpkg --update --deep --newuse world"
+ssh $USER@$HOST "revdep-rebuild $EMERGE_OPTS"
 echo "Mounting Portage filesystem to $PORTAGE"
 sshfs $USER@$HOST:/$BIN_HOST_REMOTE_DIR/$USER/$PORTAGE/ /$PORTAGE
 emerge --usepkg --update --deep --newuse world
